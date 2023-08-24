@@ -1,0 +1,57 @@
+{
+    "parameters": {
+     "api": {
+      "baseUrl": "https://open.faceit.com/data/v4/",
+      "pagination": {
+       "method": "offset",
+       "limit": "50",
+       "limitStop": {
+        "count": "1000"
+       }
+      },
+      "http": {
+       "headers": {
+        "Authorization": {
+         "function": "concat",
+         "args": [
+          "Bearer ",
+          {
+           "attr": "#token"
+          }
+         ]
+        }
+       }
+      }
+     },
+     "config": {
+      "debug": true,
+      "#token": "ENTER_YOUR_API_KEY_HERE",
+      "outputBucket": "PROD_FACEIT",
+      "jobs": [
+       {
+        "endpoint": "leaderboards/6477df807ee2fc20be911052",
+        "dataField": "items",
+        "dataType": "master_leaderboard",
+        "children": [
+         {
+          "endpoint": "players/{player-id}",
+          "dataField": ".",
+          "dataType": "players_master_elo",
+          "placeholders": {
+           "player-id": "player.user_id"
+          }
+         },
+         {
+          "endpoint": "players/{player-id}/stats/csgo",
+          "dataField": ".",
+          "dataType": "players_master_general",
+          "placeholders": {
+           "player-id": "player.user_id"
+          }
+         }
+        ]
+       }
+      ]
+     }
+    }
+   }
