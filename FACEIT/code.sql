@@ -8,7 +8,6 @@ SELECT
   t2."player_user_id" AS "player_id",
   t2."player_nickname" AS "player_name",
   t2."player_country" AS "country",
-  t2."player_skill_level" AS "skill_level",
   t2."played" AS "season_games_played",
   t2."win_rate" AS "season_win_rate",
   t2."position" AS "rank",
